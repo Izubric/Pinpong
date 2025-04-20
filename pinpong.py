@@ -42,7 +42,12 @@ FPS = 60
 
 roketka1 = Player('roketka.png', 0, 200, 5, 100, 150)
 roketka2 = Player('roketka.png', 500, 200, 5, 100, 150)
-bal = GameSprite('bal2.png', 200, 200, 5, 50, 50)
+bal = GameSprite('bal2.png', 200, 200, 15, 50, 50)
+
+font.init()
+font = font.Font(None, 35)
+lose1 = font.render('PLAYER 1 LOSE!', True, (180, 0, 0))
+lose2 = font.render('PLAYER 2 LOSE!', True, (180, 0, 0))
 
 speed_x = 3
 speed_y = 3
@@ -62,6 +67,12 @@ while game:
             speed_x *= -1
         if bal.rect.y > win_hight-50 or bal.rect.y < 0:
             speed_y *= -1
+        if bal.rect.x < 0:
+            finish = True
+            window.blit(lose1, (200, 200))
+        if bal.rect.x > win_wight:
+            finish = True
+            window.blit(lose2, (200, 200))
 
         roketka1.reset()
         roketka2.reset()
